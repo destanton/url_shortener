@@ -15,7 +15,7 @@
       <h2>BookMarks:</h2>
       {% for title in bookmark_list %}
       Title: {{ title }} &nbsp;// Description: {{ title.description }} &nbsp;// Time Created: {{ title.created }} &nbsp;//
-       <a href="{{ title.new_url }}">Link: {{title.new_url}}</a> <br>
+       <a href="{% url 'short_view' title.new_url %}">localhost:8000/{{ title.new_url }}</a> <br>
       {% endfor %}
     </div>
 

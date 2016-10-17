@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from app.models import Bookmark, Click
 from random import choice
 from string import ascii_letters, digits
+from django.http import HttpResponseRedirect
 
 
 class CreateView(CreateView):
@@ -27,6 +28,7 @@ class CreateView(CreateView):
 
 
 class ShortView(View):
-    model = Bookmark
-    # success_url =
-    pass
+    def get(self, request, new_url):
+        new = self.kwargs['new_url']
+        full = Bookmark.objects.get(new_url=new)
+        return HttpResponseRedirect(full.url)

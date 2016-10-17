@@ -19,6 +19,7 @@ class Bookmark(models.Model):
     # def time_stamp(self):
     #     return Click.objects.filter(bookmark=self).order_by("-")
 
+
 class Click(models.Model):
     bookmark = models.ForeignKey('app.Bookmark')
     time_accessed = models.DateTimeField(auto_now=True)
