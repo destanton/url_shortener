@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from app.views import CreateView
+from app.views import CreateView, ShortView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', CreateView.as_view(), name="create_view")
+    url(r'^$', CreateView.as_view(), name="create_view"),
+    url(r'^(?P<short_url>\w+)$', ShortView.as_view(), name="short_view")
 ]

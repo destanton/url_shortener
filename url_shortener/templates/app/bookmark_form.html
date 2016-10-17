@@ -5,12 +5,20 @@
     {% csrf_token %}
 
     <span>
-      <input type="" name="" value="Title">
-      <input type="" name="" value="Description">
-      <input type="" name="" value="Enter URL Here">
+      {{form.as_p}}
 
     </span>
     <input type="submit" name="" value="Submit">
-  </form>
+    </form>
+    <br>
+    <div class="">
+      <h2>BookMarks:</h2>
+      {% for title in bookmark_list %}
+      Title: {{ title }} &nbsp;// Description: {{ title.description }} &nbsp;// Time Created: {{ title.created }} &nbsp;//
+       <a href="{{ title.new_url }}">Link: {{title.new_url}}</a> <br>
+      {% endfor %}
+    </div>
+
+
 
 {% endblock %}

@@ -7,6 +7,7 @@ class Bookmark(models.Model):
     description = models.CharField(max_length=150, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    new_url = models.CharField(max_length=8)
 
     def __str__(self):
         return self.title
@@ -14,6 +15,9 @@ class Bookmark(models.Model):
     class Meta:
         ordering = ("-created",)
 
+    # @property
+    # def time_stamp(self):
+    #     return Click.objects.filter(bookmark=self).order_by("-")
 
 class Click(models.Model):
     bookmark = models.ForeignKey('app.Bookmark')
