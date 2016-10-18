@@ -27,7 +27,7 @@
         {% if title.private == False or title.user == user %}
         <div class="panel panel-default">
           <div class="panel-heading">Title: {{ title }}
-            <span class="btn-group" role="group">
+            <span class="btn-group"  role="group">
               {% if title.user.id == user.id %}
               <a href="{% url 'bookmark_update_view' title.id %}">Update</a>
               {% endif %}
@@ -36,7 +36,9 @@
            Description: {{ title.description }} &nbsp;// Time Created: {{ title.created }} &nbsp;// User: {{ title.user }}
          </div>
            <div class="panel-footer">
-             <a href="{% url 'short_view' title.new_url %}">localhost:8000/{{ title.new_url }}</a> &nbsp;// Clicks: {{ title.click_count }}
+             Link:
+             <a href="{% url 'short_view' title.new_url %}">localhost:8000/{{ title.new_url }}</a>
+              <span class="label label-primary" role="group" >Clicks: {{ title.click_count }}</span>
            </div>
         </div>
         {% endif %}
