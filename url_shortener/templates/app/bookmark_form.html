@@ -1,27 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% if not request.user.is_authenticated %}
-    <h1> Please Login or Create User </h1>
-  {% else %}
-    <h1>Let's Shorten that URL!</h1> <br>
-  <form class="" action="" method="post">
-    {% csrf_token %}
-      <span>
-        {{form.as_p}}
-      </span>
-    <input type="submit" name="" value="Submit">
-  </form>
-    <div class="">
-      <h2>BookMarks:</h2>
-        {% for title in bookmark_list %}
-          Title: {{ title }} &nbsp;// Description: {{ title.description }} &nbsp;// Time Created: {{ title.created }} &nbsp;// User: {{ title.user }}
-         <a href="{% url 'short_view' title.new_url %}">localhost:8000/{{ title.new_url }}</a> &nbsp;// Clicks: {{ title.click_count }} <br>
-       <br>
-        {% endfor %}
-    </div>
-    {% endif %}
+<div class="row">
+  <div class="col-md-4">
+    {% if not request.user.is_authenticated %}
+      <h1>Login/Create User to Shorten URL</h1>
+    {% else %}
+      <h1>Shorten that URL!</h1> <br>
+    <form class="" action="" method="post">
+      {% csrf_token %}
+        <span>
+          {{form.as_p}}
+          {{bookmark.private}}
+        </span>
+      <input type="submit" name="" value="Submit">
+    </form>
 
+{% endif %}
+
+</div>
+
+
+    <div class="col-md-8">
+      <h2>BookMarks:</h2>
+      {% for title in bookmark_list %}
+        {% if title.private == False or title.user == user %}
+        <div class="panel panel-default">
+          <div class="panel-heading">Title: {{ title }}
+            <span class="btn-group" role="group">
+              {% if title.user.id == user.id %}
+              <a href="{% url 'bookmark_update_view' title.id %}">Update</a>
+              {% endif %}
+            </span></div>
+          <div class="panel-body">
+           Description: {{ title.description }} &nbsp;// Time Created: {{ title.created }} &nbsp;// User: {{ title.user }}
+         </div>
+           <div class="panel-footer">
+             <a href="{% url 'short_view' title.new_url %}">localhost:8000/{{ title.new_url }}</a> &nbsp;// Clicks: {{ title.click_count }}
+           </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+  </div>
+</div>
 
 
 

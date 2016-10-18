@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from app.views import CreateView, ShortView, UserCreateView
+from app.views import CreateView, ShortView, UserCreateView, BookmarkUpdateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('django.contrib.auth.urls')),
     url(r'^create_user/$', UserCreateView.as_view(), name="user_create_view"),
     url(r'^$', CreateView.as_view(), name="create_view"),
+    url(r'^(?P<pk>\d+)/$', BookmarkUpdateView.as_view(), name="bookmark_update_view"),
     url(r'^(?P<new_url>\w+)/$', ShortView.as_view(), name="short_view"),
+
 ]

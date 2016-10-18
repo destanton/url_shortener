@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User
 from app.models import Bookmark, Click
 from random import choice
@@ -18,7 +18,7 @@ class UserCreateView(CreateView):
 class CreateView(CreateView):
     model = Bookmark
     success_url = "/"
-    fields = ('title', 'description', 'url')
+    fields = ('title', 'description', 'url', 'private')
 
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
@@ -39,3 +39,9 @@ class ShortView(View):
         full = Bookmark.objects.get(new_url=new_url)
         Click.objects.create(bookmark=full)
         return HttpResponseRedirect(full.url)
+
+
+class BookmarkUpdateView(UpdateView):
+    model = Bookmark
+    success_url = "/"
+    fields = ('title', 'description', 'url', 'private')

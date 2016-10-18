@@ -8,6 +8,7 @@ class Bookmark(models.Model):
     url = models.URLField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     new_url = models.CharField(max_length=8)
+    private = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
