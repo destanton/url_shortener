@@ -12,13 +12,12 @@ class Bookmark(models.Model):
     def __str__(self):
         return self.title
 
-   
     class Meta:
         ordering = ("-created",)
 
-    # @property
-    # def time_stamp(self):
-    #     return Click.objects.filter(bookmark=self).order_by("-")
+    @property
+    def click_count(self):
+        return self.click_set.count()
 
 
 class Click(models.Model):

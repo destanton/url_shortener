@@ -29,6 +29,6 @@ class CreateView(CreateView):
 
 class ShortView(View):
     def get(self, request, new_url):
-        new = self.kwargs['new_url']
-        full = Bookmark.objects.get(new_url=new)
+        full = Bookmark.objects.get(new_url=new_url)
+        Click.objects.create(bookmark=full)
         return HttpResponseRedirect(full.url)
