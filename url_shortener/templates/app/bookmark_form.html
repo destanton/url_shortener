@@ -1,24 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% if not request.user.is_authenticated %}
+    <h1> Please Login or Create User </h1>
+  {% else %}
+    <h1>Let's Shorten that URL!</h1> <br>
   <form class="" action="" method="post">
     {% csrf_token %}
-
-    <span>
-      {{form.as_p}}
-
-    </span>
+      <span>
+        {{form.as_p}}
+      </span>
     <input type="submit" name="" value="Submit">
-    </form>
-    <br>
+  </form>
     <div class="">
       <h2>BookMarks:</h2>
-      {% for title in bookmark_list %}
-      Title: {{ title }} &nbsp;// Description: {{ title.description }} &nbsp;// Time Created: {{ title.created }} &nbsp;// User: {{ title.user }}
-       <a href="{% url 'short_view' title.new_url %}">localhost:8000/{{ title.new_url }}</a> &nbsp;// Clicks: {{ title.click_count }} <br>
+        {% for title in bookmark_list %}
+          Title: {{ title }} &nbsp;// Description: {{ title.description }} &nbsp;// Time Created: {{ title.created }} &nbsp;// User: {{ title.user }}
+         <a href="{% url 'short_view' title.new_url %}">localhost:8000/{{ title.new_url }}</a> &nbsp;// Clicks: {{ title.click_count }} <br>
        <br>
-      {% endfor %}
+        {% endfor %}
     </div>
+    {% endif %}
+
 
 
 

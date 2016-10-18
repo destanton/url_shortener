@@ -6,6 +6,13 @@ from app.models import Bookmark, Click
 from random import choice
 from string import ascii_letters, digits
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
+
+
+class UserCreateView(CreateView):
+    model = User
+    form_class = UserCreationForm
+    success_url = "/"
 
 
 class CreateView(CreateView):

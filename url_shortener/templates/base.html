@@ -16,12 +16,13 @@
   </head>
   <body>
     <div class="container">
+        <a href="{% url 'user_create_view' %}">Create User</a>
         {% if not request.user.is_authenticated %}
           <a href="{% url 'login' %}">Login</a>
           {% else %}
           <a href="{% url 'logout' %}?next={% url 'create_view' %}">Logout</a>
         {% endif %}
-          <h1>Let's Shorten that URL</h1>
+
         {% block content %}
         {% endblock %}
     </div>
